@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.ivangrod</groupId>
+    <artifactId>needlehack</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>needlehack-infrastructure</artifactId>
+  <name>${project.groupId}:${project.artifactId}</name>
+  <packaging>jar</packaging>
+
+  <properties>
+    <!-- Encoding -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- Bootstrap class -->
+    <bootstrapClass>org.ivangrod.needlehack.infrastructure.Application</bootstrapClass>
+  </properties>
+
+  <dependencies>
+    <!-- Core -->
+    <dependency>
+      <groupId>${project.parent.groupId}</groupId>
+      <artifactId>needlehack-application</artifactId>
+      <version>${project.parent.version}</version>
+    </dependency>
+
+    <!-- FWK -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-amqp</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Third party libraries -->
+    <dependency>
+      <groupId>org.elasticsearch</groupId>
+      <artifactId>elasticsearch</artifactId>
+      <version>${elastic.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.elasticsearch.client</groupId>
+      <artifactId>elasticsearch-rest-client</artifactId>
+      <version>${elastic.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.elasticsearch.client</groupId>
+      <artifactId>elasticsearch-rest-high-level-client</artifactId>
+      <version>${elastic.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-core</artifactId>
+      <version>${cucumber.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-java</artifactId>
+      <version>${cucumber.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-junit</artifactId>
+      <version>${cucumber.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-spring</artifactId>
+      <version>${cucumber.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring-boot.version}</version>
+        <configuration>
+          <mainClass>${bootstrapClass}</mainClass>
+          <!-- this is necessary as we're not using the Boot parent -->
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

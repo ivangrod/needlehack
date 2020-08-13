@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.ivangrod</groupId>
+  <artifactId>needlehack</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <name>${project.groupId}:${project.artifactId}</name>
+  <packaging>pom</packaging>
+
+  <properties>
+    <!-- Build -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+
+    <spring-boot.version>2.3.2.RELEASE</spring-boot.version>
+    <elastic.version>7.8.1</elastic.version>
+    <cucumber.version>6.4.0</cucumber.version>
+
+    <!-- Plugins -->
+    <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+    <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
+    <maven-source-plugin.version>3.2.0</maven-source-plugin.version>
+    <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
+    <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
+    <maven-failsafe-plugin.version>2.22.1</maven-failsafe-plugin.version>
+  </properties>
+
+  <modules>
+    <module>needlehack-infrastructure</module>
+    <module>needlehack-application</module>
+    <module>needlehack-domain</module>
+  </modules>
+
+  <!-- Import the dependency management as a Bill of Materials (BOM) -->
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+
+    <!-- Plugin Management that must be included in the final POM to be included in children projects -->
+    <pluginManagement>
+      <plugins>
+        <!-- Compiler-->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven-compiler-plugin.version}</version>
+          <configuration>
+            <source>${maven.compiler.source}</source>
+            <target>${maven.compiler.target}</target>
+          </configuration>
+        </plugin>
+        <!-- Version manager -->
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>${versions-maven-plugin.version}</version>
+        </plugin>
+        <!-- Sources -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>${maven-source-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>attach-sources</id>
+              <goals>
+                <goal>jar-no-fork</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <!-- Javadocs -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>${maven-javadoc-plugin.version}</version>
+          <configuration>
+            <detectOfflineLinks>false</detectOfflineLinks>
+            <quiet>true</quiet>
+            <additionalOptions>-html5</additionalOptions>
+          </configuration>
+          <executions>
+            <execution>
+              <id>attach-javadocs</id>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+            </execution>
+          </executions>
+
+        </plugin>
+        <!-- Surefire (unit tests) -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${maven-surefire-plugin.version}</version>
+        </plugin>
+        <!-- Failsafe (integration tests) -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>${maven-failsafe-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>integration-test</id>
+              <goals>
+                <goal>integration-test</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>verify</id>
+              <goals>
+                <goal>verify</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>development</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+    </profile>
+
+    <profile>
+      <id>complete-install</id>
+      <build>
+        <plugins>
+          <!-- Package sources -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+          </plugin>
+          <!-- Package docs -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+</project>
