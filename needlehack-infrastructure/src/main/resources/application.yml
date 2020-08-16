@@ -1,0 +1,17 @@
+logging:
+  level:
+    root: INFO
+    org.springframework.amqp: DEBUG
+    com.rabbitmq: DEBUG
+
+elasticsearch:
+  host: localhost
+  port: 9200
+  schema: http
+
+rabbitmq:
+  exchange: domain_events
+  host: localhost
+  port: 5672
+  login: needlehack
+  password: passw0rd

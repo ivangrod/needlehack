@@ -14,15 +14,18 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 public class CreatePostSteps {
 
-    @Autowired
-    PostCreator postCreator;
+  @Autowired
+  PostCreator postCreator;
 
-    @Autowired
-    World world;
+  @Autowired
+  World world;
 
-    @Given("I create a post with title {string} and uri {string}")
-    public void i_create_a_post_with_title_and_uri(String title, String uri) {
-        CreatingPostParams params = new CreatingPostParams(title, uri, "author", "", "source", "content", LocalDateTime.now(), Collections.emptySet());
-        postCreator.execute(params);
-    }
+  @Given("I create a post with title {string} and uri {string} and author {string} from Netflix")
+  public void i_create_a_post_with_title_and_uri_and_author_from_netflix(String title, String uri,
+      String author) {
+    CreatingPostParams params = new CreatingPostParams(title, uri, author,
+        "http://www.netflixtechblog.com/", "NETFLIX",
+        "", LocalDateTime.now(), Collections.emptySet());
+    postCreator.execute(params);
+  }
 }

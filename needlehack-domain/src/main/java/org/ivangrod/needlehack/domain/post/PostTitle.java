@@ -4,7 +4,7 @@ import org.ivangrod.needlehack.domain.shared.StringValueObject;
 
 public class PostTitle extends StringValueObject {
 
-    public PostTitle(String value) {
-        super(value);
-    }
+  public PostTitle(String value) {
+    super(value);
+  }
 }

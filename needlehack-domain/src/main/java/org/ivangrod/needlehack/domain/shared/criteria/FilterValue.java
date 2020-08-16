@@ -4,7 +4,7 @@ import org.ivangrod.needlehack.domain.shared.StringValueObject;
 
 public final class FilterValue extends StringValueObject {
 
-    public FilterValue(String value) {
-        super(value);
-    }
+  public FilterValue(String value) {
+    super(value);
+  }
 }

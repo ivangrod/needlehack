@@ -1,4 +1,4 @@
-package org.ivangrod.needlehack.infrastructure.di;
+package org.ivangrod.needlehack.infrastructure.post.di;
 
 import org.ivangrod.needlehack.application.post.create.PostCreator;
 import org.ivangrod.needlehack.domain.post.PostRepository;
@@ -9,8 +9,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BeanInitializr {
 
-    @Bean
-    public PostCreator createFeedItem(PostRepository elasticsearchPostRepository, EventBus rabbitMqEventBus) {
-        return new PostCreator(elasticsearchPostRepository, rabbitMqEventBus);
-    }
+  @Bean
+  public PostCreator createFeedItem(PostRepository elasticsearchPostRepository,
+      EventBus rabbitMqEventBus) {
+    return new PostCreator(elasticsearchPostRepository, rabbitMqEventBus);
+  }
 }

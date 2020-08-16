@@ -10,5 +10,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Inherited
 public @interface DomainEventSubscriber {
-    Class<? extends DomainEvent>[] value();
+
+  Class<? extends DomainEvent>[] value();
 }
