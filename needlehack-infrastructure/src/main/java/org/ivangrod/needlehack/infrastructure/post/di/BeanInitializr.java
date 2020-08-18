@@ -11,7 +11,7 @@ public class BeanInitializr {
 
   @Bean
   public PostCreator createFeedItem(PostRepository elasticsearchPostRepository,
-      EventBus rabbitMqEventBus) {
-    return new PostCreator(elasticsearchPostRepository, rabbitMqEventBus);
+      EventBus springApplicationEventBus) {
+    return new PostCreator(elasticsearchPostRepository, springApplicationEventBus);
   }
 }
