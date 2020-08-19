@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.ivangrod.needlehack.domain.post.event.PostCollected;
 import org.ivangrod.needlehack.domain.post.event.PostCreated;
 import org.ivangrod.needlehack.domain.shared.AggregateRoot;
 import org.ivangrod.needlehack.domain.shared.StringValueObject;
@@ -50,6 +51,15 @@ public class Post extends AggregateRoot {
     return post;
   }
 
+  public static Post collect(PostId id, PostTitle title, PostUri uri, Author creator,
+      Feed origin, PostContent content, PostDate dates, Set<Topic> topics) {
+    Post post = new Post(id, title, uri, creator, origin, content, dates, topics);
+    post.record(
+        new PostCollected(id.getIdFromUri(), title.value(), uri.value(), origin.getSource(),
+            dates.getPublicationAt()));
+    return post;
+  }
+
   public HashMap<String, Serializable> toPrimitives() {
     return new HashMap<String, Serializable>() {{
       put("id", id.getIdFromUri());
@@ -60,7 +70,8 @@ public class Post extends AggregateRoot {
       put("feedUri", origin.getUri());
       put("content", content.value());
       put("publication_date", dates.publicationDateToStringFormat());
-      put("topics", topics.stream().map(StringValueObject::value).collect(Collectors.joining(",")));
+      put("topics",
+          topics.stream().map(StringValueObject::value).collect(Collectors.joining(",")));
     }};
   }
 

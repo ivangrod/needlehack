@@ -89,6 +89,18 @@
     </dependency>
 
     <dependency>
+      <groupId>com.rometools</groupId>
+      <artifactId>rome-opml</artifactId>
+      <version>${rome.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jsoup</groupId>
+      <artifactId>jsoup</artifactId>
+      <version>${jsoup.version}</version>
+    </dependency>
+
+    <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-core</artifactId>
       <version>${cucumber.version}</version>
