@@ -2,7 +2,12 @@ logging:
   level:
     root: INFO
 
+needlehack:
+  post:
+    collect: false
+
 elasticsearch:
   host: localhost
   port: 9200
   schema: http
+

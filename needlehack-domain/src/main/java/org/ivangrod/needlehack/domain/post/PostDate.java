@@ -1,7 +1,9 @@
 package org.ivangrod.needlehack.domain.post;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class PostDate {
 
@@ -11,6 +13,13 @@ public class PostDate {
   private final LocalDateTime collectAt;
 
   private final LocalDateTime publicationAt;
+
+  public PostDate(Date publicationAt) {
+    this.collectAt = LocalDateTime.now();
+    this.publicationAt = publicationAt.toInstant()
+        .atZone(ZoneId.systemDefault())
+        .toLocalDateTime();
+  }
 
   public PostDate(LocalDateTime publicationAt) {
     this.collectAt = LocalDateTime.now();
