@@ -2,17 +2,17 @@ package org.ivangrod.needlehack.application.post.collect;
 
 import java.util.List;
 import org.ivangrod.needlehack.domain.post.Feed;
-import org.ivangrod.needlehack.domain.post.FeedListener;
+import org.ivangrod.needlehack.domain.post.FeedExtractor;
 import org.ivangrod.needlehack.domain.post.Post;
 import org.ivangrod.needlehack.domain.shared.event.EventBus;
 
 public class PostCollector {
 
-  private final FeedListener feedListener;
+  private final FeedExtractor feedExtractor;
   private final EventBus eventBus;
 
-  public PostCollector(FeedListener feedListener, EventBus eventBus) {
-    this.feedListener = feedListener;
+  public PostCollector(FeedExtractor feedExtractor, EventBus eventBus) {
+    this.feedExtractor = feedExtractor;
     this.eventBus = eventBus;
   }
 
@@ -20,7 +20,7 @@ public class PostCollector {
 
     Feed feed = params.createFeed();
 
-    List<Post> postsCollected = feedListener.extract(feed);
+    List<Post> postsCollected = feedExtractor.extract(feed);
     postsCollected.forEach(post -> eventBus.publish(post.pullDomainEvents()));
 
     return postsCollected;

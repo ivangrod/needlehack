@@ -1,4 +1,4 @@
-package org.ivangrod.needlehack.infrastructure.post.service;
+package org.ivangrod.needlehack.infrastructure.post.service.rss;
 
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.SyndFeedInput;
@@ -7,17 +7,22 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.ivangrod.needlehack.domain.post.Author;
 import org.ivangrod.needlehack.domain.post.Feed;
-import org.ivangrod.needlehack.domain.post.FeedListener;
+import org.ivangrod.needlehack.domain.post.FeedExtractor;
 import org.ivangrod.needlehack.domain.post.Post;
+import org.ivangrod.needlehack.domain.post.PostDate;
+import org.ivangrod.needlehack.domain.post.PostId;
+import org.ivangrod.needlehack.domain.post.PostTitle;
+import org.ivangrod.needlehack.domain.post.PostUri;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RssFeedListener implements FeedListener {
+public class RssFeedExtractor implements FeedExtractor {
 
-  private final static Logger log = LoggerFactory.getLogger(RssFeedListener.class);
+  private final static Logger log = LoggerFactory.getLogger(RssFeedExtractor.class);
 
   @Override
   public List<Post> extract(final Feed feed) {
@@ -33,7 +38,10 @@ public class RssFeedListener implements FeedListener {
 
       postsCollected.addAll(feedLoaded.getEntries()
           .stream()
-          .map(entry -> Post.collect(feed, entry))
+          .map(entry -> Post
+              .collect(PostId.buildFromUri(entry.getLink()), new PostTitle(entry.getTitle()),
+                  new PostUri(entry.getLink()), new Author(entry.getAuthor()), feed,
+                  new PostDate(entry.getPublishedDate())))
           .collect(Collectors.toList()));
 
     } catch (Exception exception) {

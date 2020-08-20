@@ -2,6 +2,7 @@ package org.ivangrod.needlehack.domain.post;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -52,8 +53,10 @@ public class Post extends AggregateRoot {
   }
 
   public static Post collect(PostId id, PostTitle title, PostUri uri, Author creator,
-      Feed origin, PostContent content, PostDate dates, Set<Topic> topics) {
-    Post post = new Post(id, title, uri, creator, origin, content, dates, topics);
+      Feed origin, PostDate dates) {
+
+    //TODO Consume content and topics from collecting process
+    Post post = new Post(id, title, uri, creator, origin, null, dates, Collections.emptySet());
     post.record(
         new PostCollected(id.getIdFromUri(), title.value(), uri.value(), origin.getSource(),
             dates.getPublicationAt()));

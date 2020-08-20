@@ -5,9 +5,9 @@ import org.ivangrod.needlehack.domain.post.event.PostCreated;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class IncrementPostCreated {
 
   private static final Logger log = LoggerFactory.getLogger(IncrementPostCreated.class);
