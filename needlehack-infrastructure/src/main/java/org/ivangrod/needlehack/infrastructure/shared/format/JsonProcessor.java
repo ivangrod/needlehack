@@ -8,6 +8,14 @@ import java.util.HashMap;
 
 public class JsonProcessor {
 
+  public static String encode(Object objectSerializable) {
+    try {
+      return new ObjectMapper().writeValueAsString(objectSerializable);
+    } catch (JsonProcessingException e) {
+      return "";
+    }
+  }
+
   public static String encode(HashMap<String, Serializable> map) {
     try {
       return new ObjectMapper().writeValueAsString(map);

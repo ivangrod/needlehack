@@ -4,5 +4,5 @@ Feature: Create a new post
   I want to create a new post
 
   Scenario: A valid non existing post
-    Given I create a post with title 'Improving our video encodes for legacy devices' and uri 'https://netflixtechblog.com/improving-our-video-encodes-for-legacy-devices-2b6b56eec5c9' and author 'Greg Burrell' from Netflix
+    Given I create a post with title 'Ready for changes with Hexagonal Architecture' and uri 'https://netflixtechblog.com/ready-for-changes-with-hexagonal-architecture-b315ec967749' and author 'Damir Svrtan' from Netflix
     Then the response status code should be 201

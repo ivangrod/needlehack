@@ -1,0 +1,50 @@
+version: '3.1'
+services:
+
+  #############
+  # ELK
+  #############
+  elasticsearch-test:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.8.1
+    container_name: elasticsearch-test
+    environment:
+      - node.name=needlehack-test-node
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./elastic/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+      - 9200:9200
+    networks:
+      - elk
+    healthcheck:
+      test: ["CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+
+  kibana-test:
+    image: docker.elastic.co/kibana/kibana:7.8.1
+    container_name: kibana-test
+    volumes:
+      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
+    ports:
+      - 5601:5601
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch-test
+    healthcheck:
+      test: curl -f -o /tmp/kibana.txt localhost:5601/app/kibana || exit 1
+      interval: 30s
+      timeout: 90s
+      retries: 3
+
+networks:
+  elk:
+    driver: bridge

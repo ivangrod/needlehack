@@ -1,18 +1,28 @@
 package org.ivangrod.needlehack.infrastructure.acceptance.helper;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.test.web.servlet.ResultActions;
 
 @Component
 public class World {
 
-  private ResponseEntity response;
+    private ResultActions preconditionResponse;
 
-  public void setResponse(ResponseEntity response) {
-    this.response = response;
-  }
+    private ResultActions actResponse;
 
-  public ResponseEntity getResponse() {
-    return response;
-  }
+    public ResultActions getPreconditionResponse() {
+        return preconditionResponse;
+    }
+
+    public void setPreconditionResponse(ResultActions preconditionResponse) {
+        this.preconditionResponse = preconditionResponse;
+    }
+
+    public ResultActions getActResponse() {
+        return actResponse;
+    }
+
+    public void setActResponse(ResultActions actResponse) {
+        this.actResponse = actResponse;
+    }
 }

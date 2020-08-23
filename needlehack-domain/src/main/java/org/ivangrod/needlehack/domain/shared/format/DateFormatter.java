@@ -11,4 +11,8 @@ public class DateFormatter {
   public static String dateToString(LocalDateTime dateTime) {
     return dateTime.format(TIME_FORMATTER);
   }
+
+  public static LocalDateTime stringToDate(String dateTimeInString) {
+    return LocalDateTime.parse(dateTimeInString, TIME_FORMATTER);
+  }
 }

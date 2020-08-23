@@ -26,7 +26,9 @@ public class CollectPostReady {
     @EventListener
     public void onApplicationEvent(ContextRefreshedEvent event) {
         logger.info("#### Collecting process STARTED at [{}] ####", Instant.now());
-        rssReader.consumeOpml();
+        if (initCollectinPostProcess) {
+            rssReader.consumeOpml();
+        }
         logger.info("#### Collecting process ENDED at [{}] ####", Instant.now());
     }
 }
