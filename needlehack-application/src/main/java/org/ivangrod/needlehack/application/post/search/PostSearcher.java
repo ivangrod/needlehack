@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.ivangrod.needlehack.domain.post.PostRepository;
+import org.ivangrod.needlehack.domain.post.search.PostsFound;
 import org.ivangrod.needlehack.domain.shared.criteria.Criteria;
 import org.ivangrod.needlehack.domain.shared.criteria.Filters;
 import org.ivangrod.needlehack.domain.shared.criteria.Order;
@@ -21,7 +22,7 @@ public class PostSearcher {
         this.eventBus = eventBus;
     }
 
-    public List<PostFound> execute(SearchingPostParams params) {
+    public SearchingPostReturn execute(SearchingPostParams params) {
 
         List<HashMap<String, String>> filters = new ArrayList<>();
 
@@ -35,12 +36,13 @@ public class PostSearcher {
         Criteria criteria = new Criteria(
                 Filters.fromValues(filters),
                 Order.none(),
-                Optional.empty(),
-                Optional.empty()
+                Optional.of(params.getLimit()),
+                Optional.of(params.getOffset())
         );
 
-        List<PostFound> postFoundsFromTerm = postRepository.matching(criteria).stream()
+        PostsFound postsFound = postRepository.matching(criteria);
+        List<PostFound> postFoundsFromTerm = postsFound.getPosts().stream()
                 .map(PostFound::fromPost).collect(Collectors.toList());
-        return postFoundsFromTerm;
+        return new SearchingPostReturn(postsFound.getNumTotal(), postFoundsFromTerm);
     }
 }

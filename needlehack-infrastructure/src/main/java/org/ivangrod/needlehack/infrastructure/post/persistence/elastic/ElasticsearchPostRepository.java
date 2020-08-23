@@ -1,8 +1,8 @@
 package org.ivangrod.needlehack.infrastructure.post.persistence.elastic;
 
-import java.util.List;
 import org.ivangrod.needlehack.domain.post.Post;
 import org.ivangrod.needlehack.domain.post.PostRepository;
+import org.ivangrod.needlehack.domain.post.search.PostsFound;
 import org.ivangrod.needlehack.domain.shared.criteria.Criteria;
 import org.ivangrod.needlehack.infrastructure.shared.persistence.elastic.ElasticsearchClient;
 import org.ivangrod.needlehack.infrastructure.shared.persistence.elastic.ElasticsearchRepository;
@@ -22,13 +22,15 @@ public final class ElasticsearchPostRepository extends ElasticsearchRepository<P
     }
 
     @Override
-    public List<Post> searchAll() {
-        return searchAllInElastic(Post::fromPrimitives);
+    public PostsFound searchAll() {
+        SearchResult searchResult = searchAllInElastic(Post::fromPrimitives);
+        return new PostsFound(searchResult.getTotal(), searchResult.getResults());
     }
 
     @Override
-    public List<Post> matching(Criteria criteria) {
-        return searchByCriteria(criteria, Post::fromPrimitives);
+    public PostsFound matching(Criteria criteria) {
+        SearchResult searchResult = searchByCriteria(criteria, Post::fromPrimitives);
+        return new PostsFound(searchResult.getTotal(), searchResult.getResults());
     }
 
     @Override

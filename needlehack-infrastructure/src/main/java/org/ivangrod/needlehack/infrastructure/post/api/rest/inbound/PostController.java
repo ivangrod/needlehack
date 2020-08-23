@@ -1,12 +1,12 @@
 package org.ivangrod.needlehack.infrastructure.post.api.rest.inbound;
 
 import java.net.URI;
-import java.util.List;
 import org.ivangrod.needlehack.application.post.create.CreatingPostParams;
 import org.ivangrod.needlehack.application.post.create.PostCreator;
 import org.ivangrod.needlehack.application.post.search.PostFound;
 import org.ivangrod.needlehack.application.post.search.PostSearcher;
 import org.ivangrod.needlehack.application.post.search.SearchingPostParams;
+import org.ivangrod.needlehack.application.post.search.SearchingPostReturn;
 import org.ivangrod.needlehack.domain.post.PostId;
 import org.ivangrod.needlehack.domain.shared.format.DateFormatter;
 import org.ivangrod.needlehack.infrastructure.post.api.rest.inbound.dto.PostDto;
@@ -51,10 +51,12 @@ public final class PostController {
     }
 
     @GetMapping(path = "/posts", produces = MediaType.APPLICATION_JSON_VALUE)
-    public SearchPostResponse searchPost(@RequestParam(value = "term", defaultValue = "*") String term, @RequestParam(value = "page", defaultValue = "0") Integer page) {
+    public SearchPostResponse searchPost(@RequestParam(value = "term", defaultValue = "*") String term,
+                                         @RequestParam(value = "page", defaultValue = "0") Integer page,
+                                         @RequestParam(value = "limit", defaultValue = "10") Integer limit) {
 
-        List<PostFound> result = postSearcher.execute(new SearchingPostParams(term));
-        PageRequest pageRequest = PageRequest.of(page, 10);
-        return new SearchPostResponse(new PageImpl<PostFound>(result, pageRequest, result.size()), HttpStatus.OK);
+        SearchingPostReturn result = postSearcher.execute(new SearchingPostParams(term, limit, page));
+        PageRequest pageRequest = PageRequest.of(page, limit);
+        return new SearchPostResponse(new PageImpl<PostFound>(result.getPosts(), pageRequest, result.getNumTotal()), HttpStatus.OK);
     }
 }
