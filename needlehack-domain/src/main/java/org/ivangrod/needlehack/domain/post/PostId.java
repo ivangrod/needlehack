@@ -8,37 +8,21 @@ import org.ivangrod.needlehack.domain.shared.StringValueObject;
 
 public class PostId extends StringValueObject {
 
-  private String idFromUri;
-
-  private PostId(String idFromUri) {
-    super(null);
-    this.idFromUri = idFromUri;
-  }
-
-  private PostId(String value, String idFromUri) {
-    super(value);
-    this.idFromUri = idFromUri;
-  }
-
-  public static PostId buildFromUri(String uri) {
-
-    String identifier = "";
-    try {
-      MessageDigest md = MessageDigest.getInstance("MD5");
-      md.update(uri.getBytes("UTF-8"),0, uri.length());
-      identifier = new BigInteger(1, md.digest()).toString(16);
-    } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-      e.printStackTrace();
+    private PostId(String value) {
+        super(value);
     }
 
-    return new PostId(identifier);
-  }
+    public static PostId buildFromUri(String uri) {
 
-  public static PostId buildFromIdentifier(String identifier) {
-    return new PostId(identifier);
-  }
+        String identifier = "";
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(uri.getBytes("UTF-8"), 0, uri.length());
+            identifier = new BigInteger(1, md.digest()).toString(16);
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
-  public String getIdFromUri() {
-    return idFromUri;
-  }
+        return new PostId(identifier);
+    }
 }

@@ -48,7 +48,7 @@ public class Post extends AggregateRoot {
                               Feed origin, PostContent content, PostDate dates, Set<Topic> topics) {
         Post post = new Post(id, title, uri, creator, origin, content, dates, topics);
         post.record(
-                new PostCreated(id.getIdFromUri(), title.value(), uri.value(), dates.getPublicationAt()));
+                new PostCreated(id.value(), title.value(), uri.value(), dates.getPublicationAt()));
         return post;
     }
 
@@ -58,14 +58,13 @@ public class Post extends AggregateRoot {
         //TODO Consume content and topics from collecting process
         Post post = new Post(id, title, uri, creator, origin, null, dates, Collections.emptySet());
         post.record(
-                new PostCollected(id.getIdFromUri(), title.value(), uri.value(), origin.getSource(),
+                new PostCollected(id.value(), title.value(), uri.value(), origin.getSource(),
                         dates.getPublicationAt()));
         return post;
     }
 
     public HashMap<String, Serializable> toPrimitives() {
         return new HashMap<String, Serializable>() {{
-            put("id", id.getIdFromUri());
             put("title", title.value());
             put("uri", uri.value());
             put("creator", creator.value());
@@ -80,7 +79,7 @@ public class Post extends AggregateRoot {
 
     public static Post fromPrimitives(Map<String, Object> plainData) {
 
-        return new Post(PostId.buildFromIdentifier((String) plainData.get("uri")),
+        return new Post(PostId.buildFromUri((String) plainData.get("uri")),
                 new PostTitle((String) plainData.get("title")),
                 new PostUri((String) plainData.get("uri")),
                 new Author((String) plainData.get("creator")),
