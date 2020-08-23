@@ -28,7 +28,7 @@ public final class ElasticsearchCriteriaConverter {
     SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
 
     sourceBuilder.from(criteria.offset().orElse(0));
-    sourceBuilder.size(criteria.limit().orElse(1000));
+    sourceBuilder.size(criteria.limit().orElse(100));
 
     if (criteria.order().hasOrder()) {
       sourceBuilder.sort(
