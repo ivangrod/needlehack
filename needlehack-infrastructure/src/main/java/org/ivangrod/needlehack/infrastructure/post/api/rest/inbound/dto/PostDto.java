@@ -1,6 +1,5 @@
 package org.ivangrod.needlehack.infrastructure.post.api.rest.inbound.dto;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,7 +17,7 @@ public class PostDto {
 
   private String content;
 
-  private LocalDateTime publicationDate;
+  private String publicationDate;
 
   private Set<String> topics;
 
@@ -26,7 +25,7 @@ public class PostDto {
   }
 
   public PostDto(String title, String uri, String author, String feedUri, String feedSource,
-      String content, LocalDateTime publicationDate, Set<String> topics) {
+      String content, String publicationDate, Set<String> topics) {
     this.title = title;
     this.uri = uri;
     this.author = author;
@@ -85,11 +84,11 @@ public class PostDto {
     this.content = content;
   }
 
-  public LocalDateTime getPublicationDate() {
+  public String getPublicationDate() {
     return publicationDate;
   }
 
-  public void setPublicationDate(LocalDateTime publicationDate) {
+  public void setPublicationDate(String publicationDate) {
     this.publicationDate = publicationDate;
   }
 
