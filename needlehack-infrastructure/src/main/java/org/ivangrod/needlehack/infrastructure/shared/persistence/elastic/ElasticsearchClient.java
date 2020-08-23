@@ -26,9 +26,9 @@ public final class ElasticsearchClient {
     return indexPrefix;
   }
 
-  public void persist(String moduleName, HashMap<String, Serializable> plainBody)
+  public void persist(String moduleName, String identifier, HashMap<String, Serializable> plainBody)
       throws IOException {
-    IndexRequest request = new IndexRequest(indexFor(moduleName)).source(plainBody);
+    IndexRequest request = new IndexRequest(indexFor(moduleName)).id(identifier).source(plainBody);
     highLevelClient().index(request, RequestOptions.DEFAULT);
   }
 

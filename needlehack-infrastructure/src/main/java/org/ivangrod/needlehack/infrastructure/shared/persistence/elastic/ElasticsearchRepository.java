@@ -54,9 +54,9 @@ public abstract class ElasticsearchRepository<T> {
     return searchAllInElastic(unserializer, criteriaConverter.convert(criteria));
   }
 
-  protected void persist(HashMap<String, Serializable> plainBody) {
+  protected void persist(String identifier, HashMap<String, Serializable> plainBody) {
     try {
-      client.persist(moduleName(), plainBody);
+      client.persist(moduleName(), identifier, plainBody);
     } catch (IOException e) {
       e.printStackTrace();
     }

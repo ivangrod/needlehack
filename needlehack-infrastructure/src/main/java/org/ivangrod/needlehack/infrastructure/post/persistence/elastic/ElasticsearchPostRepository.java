@@ -10,29 +10,29 @@ import org.springframework.stereotype.Service;
 
 @Service
 public final class ElasticsearchPostRepository extends ElasticsearchRepository<Post> implements
-    PostRepository {
+        PostRepository {
 
-  public ElasticsearchPostRepository(ElasticsearchClient client) {
-    super(client);
-  }
+    public ElasticsearchPostRepository(ElasticsearchClient client) {
+        super(client);
+    }
 
-  @Override
-  public void save(Post post) {
-    persist(post.toPrimitives());
-  }
+    @Override
+    public void save(Post post) {
+        persist(post.getId().value(), post.toPrimitives());
+    }
 
-  @Override
-  public List<Post> searchAll() {
-    return searchAllInElastic(Post::fromPrimitives);
-  }
+    @Override
+    public List<Post> searchAll() {
+        return searchAllInElastic(Post::fromPrimitives);
+    }
 
-  @Override
-  public List<Post> matching(Criteria criteria) {
-    return searchByCriteria(criteria, Post::fromPrimitives);
-  }
+    @Override
+    public List<Post> matching(Criteria criteria) {
+        return searchByCriteria(criteria, Post::fromPrimitives);
+    }
 
-  @Override
-  protected String moduleName() {
-    return "posts";
-  }
+    @Override
+    protected String moduleName() {
+        return "posts";
+    }
 }
