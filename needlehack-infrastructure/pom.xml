@@ -133,15 +133,23 @@
   </dependencies>
 
   <build>
+    <finalName>needlehack</finalName>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <version>${spring-boot.version}</version>
-        <configuration>
-          <mainClass>${bootstrapClass}</mainClass>
-          <!-- this is necessary as we're not using the Boot parent -->
-        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+            <configuration>
+              <classifier>exec</classifier>
+              <mainClass>${bootstrapClass}</mainClass>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
