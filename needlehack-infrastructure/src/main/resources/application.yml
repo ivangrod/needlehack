@@ -5,7 +5,7 @@ logging:
 
 needlehack:
   post:
-    collect: false
+    collect: true
 
 elasticsearch:
   host: localhost

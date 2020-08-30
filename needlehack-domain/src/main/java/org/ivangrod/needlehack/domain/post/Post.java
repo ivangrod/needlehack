@@ -57,6 +57,8 @@ public class Post extends AggregateRoot {
     Post post = new Post(id, title, uri, creator, origin, content, dates, topics);
     post.record(
         new PostCollected(id.value(), title.value(), uri.value(), origin.getSource(),
+            creator.value(), origin.getUri(), content.value(),
+            topics.stream().map(topic -> topic.value()).collect(Collectors.toSet()),
             dates.getPublicationAt()));
     return post;
   }
