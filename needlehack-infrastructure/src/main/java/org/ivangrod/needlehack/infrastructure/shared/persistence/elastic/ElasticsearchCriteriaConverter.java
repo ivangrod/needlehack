@@ -53,7 +53,8 @@ public final class ElasticsearchCriteriaConverter {
       QueryBuilder query = queryForFilter(filter);
 
       if (isPositiveOperator(filter.operator())) {
-        boolQueryBuilder.must(query);
+        // TODO: Test 'should' to combine multiple filters instead of 'must'
+        boolQueryBuilder.should(query);
       } else {
         boolQueryBuilder.mustNot(query);
       }
