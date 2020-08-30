@@ -60,7 +60,7 @@ public class CreatingPostParams {
   }
 
   public PostContent getContent() {
-    return new PostContent(content);
+    return PostContent.buildWithContentPlain(content);
   }
 
   public PostDate getPublicationDate() {
