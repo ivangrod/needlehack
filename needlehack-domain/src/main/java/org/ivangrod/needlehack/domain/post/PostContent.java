@@ -4,7 +4,16 @@ import org.ivangrod.needlehack.domain.shared.StringValueObject;
 
 public class PostContent extends StringValueObject {
 
-  public PostContent(String value) {
+  private PostContent(String value) {
     super(value);
+  }
+
+  public static PostContent buildWithContentProcessed(String contentWithoutProcessiing,
+      ContentProcessor processor) {
+    return new PostContent(processor.execute(contentWithoutProcessiing));
+  }
+
+  public static PostContent buildWithContentPlain(String contentWithoutProcessiing) {
+    return new PostContent(contentWithoutProcessiing);
   }
 }

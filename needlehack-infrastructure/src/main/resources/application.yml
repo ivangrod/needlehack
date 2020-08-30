@@ -1,11 +1,11 @@
 logging:
   level:
     root: INFO
-    org.ivangrod.needlehack: WARN
+    org.ivangrod.needlehack: INFO
 
 needlehack:
   post:
-    collect: true
+    collect: false
 
 elasticsearch:
   host: localhost
