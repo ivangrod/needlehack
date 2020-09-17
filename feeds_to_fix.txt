@@ -50,31 +50,10 @@
 [Vevo] was loaded
 [Vine] was loaded
 [VNGRS] was loaded
-[WalmartLabs] was loaded
-[We Are Wizards] was loaded
-[WebEngage] was loaded
-[Wonga Technology] was loaded
-[WyeWorks] was loaded
-[Xmartlabs] was loaded
-[ZeeMee] was loaded
-[Zenefits] was loaded
-[Zillow] was loaded
-[Zomato] was loaded
+
 [Addy Osmani] was loaded
 [Adrian Colyer] was loaded
-[Anders Aarvik] was loaded
-[Andreas Schuster] was loaded
-[Andrew Bancroft] was loaded
-[Barry Warsaw] was loaded
-[Ben McCormick] was loaded
-[Bill the Lizard] was loaded
-[Brandon Rhodes] was loaded
-[Cocoa Is My Girlfriend] was loaded
-[Code with style!] was loaded
-[Deborah Digges] was loaded
 [Discover Meteor] was loaded
-[Evan Hahn] was loaded
-[Ian Sommerville] was loaded
 [Ievgen Kuzminov] was loaded
 [Jake Trent] was loaded
 [Jan Lelis] was loaded
