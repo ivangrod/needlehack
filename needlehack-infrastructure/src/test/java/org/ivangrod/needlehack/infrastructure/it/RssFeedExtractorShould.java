@@ -22,7 +22,7 @@ public class RssFeedExtractorShould {
   @Test
   public void return_a_collection_of_posts_given_a_feed_with_an_rss_uri() {
     List<Post> posts = rssFeedExtractor
-        .extract(new Feed("https://blog.arkency.com/atom.xml", "Arkency"));
+        .extract(new Feed("http://feeds.feedburner.com/blogspot/hsDu", "Android"));
 
     assertTrue(posts.size() > 0);
   }

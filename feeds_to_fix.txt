@@ -1,37 +1,17 @@
 [Azavea] was loaded
 [Blogfoster] was loaded
-[DataFox] was loaded
-[DeferPanic] was loaded
-[Deliveroo] was loaded
-[DoorDash] was loaded
-[Eharmony] was loaded
-[Engine Yard] was loaded
-[Flickr] was loaded
-[Flipboard] was loaded
-[Foursquare] was loaded
-[Funding Circle] was loaded
-[GameChanger] was loaded
-[Geoblink] was loaded
-[GitHub Old] was loaded
-[GoCardless] was loaded
 [Google Online Security] was loaded
 [GoSquared] was loaded
-[Grab] was loaded
 [Grafana] was loaded
 [Grammarly] was loaded
-[Grouper] was loaded
 [Harry's] was loaded
 [Hasura] was loaded
-[Honeybadger] was loaded
 [Hootsuite] was loaded
 [IBM developerWorks] was loaded
 [IFTTT] was loaded
 [IMVU] was loaded
 [Intel] was loaded
-[Intent HQ] was loaded
-[Intent Media] was loaded
 [Intercom] was loaded
-[InVision] was loaded
 [Jet Technology] was loaded
 [Just Eat] was loaded
 [Khan Academy] was loaded
@@ -41,8 +21,6 @@
 [Made Tech] was loaded
 [Mandrill] was loaded
 [MapTiler] was loaded
-[MemSQL] was loaded
-[Microsoft Python Engineering] was loaded
 [Mozilla Automation Team] was loaded
 [Mozilla Release Engineering] was loaded
 [NextRoll] was loaded
@@ -52,23 +30,17 @@
 [Paypal] was loaded
 [PubNub:] was loaded
 [Realm.io] was loaded
-[Remind] was loaded
 [Schibsted Tech Polska] was loaded
 [Scrunch] was loaded
 [Secret Escapes] was loaded
 [Segment] was loaded
 [Semantics3] was loaded
-[Semaphore CI Engineering] was loaded
-[Sensible] was loaded
 [Settled] was loaded
-[Shape Security] was loaded
 [Sharethis] was loaded
 [Shazam] was loaded
-[Shopify] was loaded
 [Snyk] was loaded
 [Takipi] was loaded
 [Target] was loaded
-[theScore] was loaded
 [Thumbtack] was loaded
 [Tinder] was loaded
 [TripAdvisor] was loaded
@@ -79,10 +51,8 @@
 [Vine] was loaded
 [VNGRS] was loaded
 [WalmartLabs] was loaded
-[Wattpad] was loaded
 [We Are Wizards] was loaded
 [WebEngage] was loaded
-[Wingify] was loaded
 [Wonga Technology] was loaded
 [WyeWorks] was loaded
 [Xmartlabs] was loaded
@@ -95,72 +65,16 @@
 [Anders Aarvik] was loaded
 [Andreas Schuster] was loaded
 [Andrew Bancroft] was loaded
-[Andrew Ray] was loaded
-[Andrey Akinshin] was loaded
-[Armin Ronacher] was loaded
 [Barry Warsaw] was loaded
 [Ben McCormick] was loaded
 [Bill the Lizard] was loaded
-[Blundell's Android Tutorials] was loaded
 [Brandon Rhodes] was loaded
-[Chris Wellons] was loaded
 [Cocoa Is My Girlfriend] was loaded
 [Code with style!] was loaded
-[Daily Tech Video] was loaded
 [Deborah Digges] was loaded
 [Discover Meteor] was loaded
 [Evan Hahn] was loaded
-[Evan Jones] was loaded
-[Evan Miller] was loaded
 [Ian Sommerville] was loaded
 [Ievgen Kuzminov] was loaded
-[Ilija Eftimov] was loaded
-[Ilya Grigorik] was loaded
 [Jake Trent] was loaded
-[Jake Wharton] was loaded
-[James Hague] was loaded
-[James Long] was loaded
 [Jan Lelis] was loaded
-[Jeff Atwood] was loaded
-[Jesus Castello] was loaded
-[Jon Kensy] was loaded
-[Jonathan Dekhtiar] was loaded
-[Josh Haberman] was loaded
-[Juan Treminio] was loaded
-[Larry Land] was loaded
-[Lea Verou] was loaded
-[Lerner Consulting Blog] was loaded
-[Luciano Mammino] was loaded
-[Matt Aimonetti] was loaded
-[Matt Warren] was loaded
-[Michaël Gallego] was loaded
-[Michael Herman] was loaded
-[Mike Ash] was loaded
-[Nikola Brežnjak] was loaded
-[Nikolay Nemshilov] was loaded
-[Paul Graham] was loaded
-[Peteris Krumins] was loaded
-[Petr Mitrichev] was loaded
-[Philipp Oppermann] was loaded
-[Piotr Wittchen] was loaded
-[Radek Pazdera] was loaded
-[Regular Geek] was loaded
-[Rudy Huyn] was loaded
-[Rudolf Olah] was loaded
-[Sam Saffron] was loaded
-[Sergey Zhuk] was loaded
-[Scott Johnson] was loaded
-[Stack Abuse] was loaded
-[Stefan Parker] was loaded
-[Swizec Teller] was loaded
-[Tero Parviainen] was loaded
-[Thomas Young] was loaded
-[Tikhon Jelvis] was loaded
-[Todd Motto] was loaded
-[Yifan Lu] was loaded
-[Android] was loaded
-[Atom.io] was loaded
-[React Native] was loaded
-[RocksDB] was loaded
-[Sketch] was loaded
-[Vertabelo] was loaded
