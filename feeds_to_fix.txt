@@ -1,59 +1,12 @@
-[Azavea] was loaded
-[Blogfoster] was loaded
-[Google Online Security] was loaded
-[GoSquared] was loaded
-[Grafana] was loaded
-[Grammarly] was loaded
-[Harry's] was loaded
-[Hasura] was loaded
-[Hootsuite] was loaded
-[IBM developerWorks] was loaded
-[IFTTT] was loaded
-[IMVU] was loaded
-[Intel] was loaded
-[Intercom] was loaded
-[Jet Technology] was loaded
-[Just Eat] was loaded
-[Khan Academy] was loaded
-[King] was loaded
-[Laterooms] was loaded
-[LiveChat] was loaded
-[Made Tech] was loaded
-[Mandrill] was loaded
-[MapTiler] was loaded
-[Mozilla Automation Team] was loaded
-[Mozilla Release Engineering] was loaded
-[NextRoll] was loaded
-[Nvidia] was loaded
-[Opensooq] was loaded
-[Panorama Education] was loaded
-[Paypal] was loaded
-[PubNub:] was loaded
-[Realm.io] was loaded
-[Schibsted Tech Polska] was loaded
-[Scrunch] was loaded
-[Secret Escapes] was loaded
-[Segment] was loaded
-[Semantics3] was loaded
-[Settled] was loaded
-[Sharethis] was loaded
-[Shazam] was loaded
-[Snyk] was loaded
-[Takipi] was loaded
-[Target] was loaded
-[Thumbtack] was loaded
-[Tinder] was loaded
-[TripAdvisor] was loaded
-[TrueCar] was loaded
-[Twilio] was loaded
-[Twitter] was loaded
-[Vevo] was loaded
-[Vine] was loaded
-[VNGRS] was loaded
-
-[Addy Osmani] was loaded
-[Adrian Colyer] was loaded
-[Discover Meteor] was loaded
-[Ievgen Kuzminov] was loaded
-[Jake Trent] was loaded
-[Jan Lelis] was loaded
+[Blogfoster]
+[Just Eat]
+[PubNub:]
+[Target]
+[TripAdvisor]
+[Twilio]
+[Addy Osmani]
+[Adrian Colyer]
+[Discover Meteor]
+[Ievgen Kuzminov]
+[Jake Trent]
+[Jan Lelis]
