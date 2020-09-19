@@ -50,7 +50,8 @@ public class RssFeedExtractor implements FeedExtractor {
               .collect(PostId.buildFromUri(entry.getLink()), new PostTitle(entry.getTitle()),
                   new PostUri(entry.getLink()), new Author(entry.getAuthor()), feed,
                   extractContent(entry),
-                  new PostDate(entry.getPublishedDate()), extractTopics(entry)))
+                  (entry.getPublishedDate() != null) ? new PostDate(entry.getPublishedDate())
+                      : new PostDate(entry.getUpdatedDate()), extractTopics(entry)))
           .collect(Collectors.toList()));
 
     } catch (Exception exception) {
@@ -70,7 +71,12 @@ public class RssFeedExtractor implements FeedExtractor {
       entryFromFeed.getContents()
           .forEach(contentFromEntry -> strBuilder.append(contentFromEntry.getValue()));
       content = PostContent.buildWithContentProcessed(strBuilder.toString(), new JsoupProcessor());
+
+    } else if (entryFromFeed.getDescription() != null) {
+      content = PostContent.buildWithContentProcessed(entryFromFeed.getDescription().getValue(),
+          new JsoupProcessor());
     }
+
     return content;
   }
 
