@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "com.ivangrod"
-version = "0.0.1-SNAPSHOT"
+version = "1.0.0-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
@@ -26,6 +26,11 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.springframework.shell:spring-shell-starter")
+
+    implementation("com.rometools:rome-opml:1.18.0")
+    implementation("org.jsoup:jsoup:1.15.3")
+    implementation("org.apache.commons:commons-text:1.10.0")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.amqp:spring-rabbit-test")
     testImplementation("org.testcontainers:junit-jupiter")
