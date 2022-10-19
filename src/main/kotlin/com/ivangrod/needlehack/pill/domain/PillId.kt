@@ -3,7 +3,7 @@ package com.ivangrod.needlehack.pill.domain
 import java.math.BigInteger
 import java.security.MessageDigest
 
-class PillId private constructor(val value: String) {
+class PillId(val value: String) {
 
     companion object {
 

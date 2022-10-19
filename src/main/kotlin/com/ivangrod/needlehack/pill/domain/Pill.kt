@@ -1,15 +1,15 @@
 package com.ivangrod.needlehack.pill.domain
 
-class Pill private constructor(
-    id: PillId,
-    title: Title,
-    uri: Uri,
-    creator: Author,
-    origin: Feed,
-    content: Content,
-    collectedAt: CollectingDate,
-    publishedAt: PublishingDate,
-    topics: Set<Topic>
+data class Pill(
+    val id: PillId,
+    val title: Title,
+    val uri: Uri,
+    val author: Author,
+    val origin: Feed,
+    val content: Content,
+    val collectedAt: CollectingDate,
+    val publishedAt: PublishingDate,
+    val topics: Set<Topic>
 ) {
 
     companion object {
@@ -17,11 +17,11 @@ class Pill private constructor(
         fun collect(
             title: Title,
             uri: Uri,
-            creator: Author,
+            author: Author,
             origin: Feed,
             content: Content,
             publishedAt: PublishingDate,
             topics: Set<Topic>
-        ): Pill = Pill(PillId.fromUri(uri), title, uri, creator, origin, content, CollectingDate(), publishedAt, topics)
+        ): Pill = Pill(PillId.fromUri(uri), title, uri, author, origin, content, CollectingDate(), publishedAt, topics)
     }
 }
