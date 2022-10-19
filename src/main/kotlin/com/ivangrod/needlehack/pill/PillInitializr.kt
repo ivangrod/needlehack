@@ -1,5 +1,6 @@
 package com.ivangrod.needlehack.pill
 
+import com.ivangrod.needlehack.pill.adapter.out.persistence.MongoDBPillRepository
 import com.ivangrod.needlehack.pill.adapter.out.persistence.MongoDBPills
 import com.ivangrod.needlehack.pill.adapter.out.resources.OpmlFeeds
 import com.ivangrod.needlehack.pill.adapter.out.rss.RomeFeedExtractor
@@ -20,7 +21,7 @@ class PillInitializr {
     fun feedExtractor(): FeedExtractor = RomeFeedExtractor(JsoupProcessor())
 
     @Bean
-    fun pills(): Pills = MongoDBPills()
+    fun pills(repository: MongoDBPillRepository): Pills = MongoDBPills(repository)
 
     @Bean
     fun feeds(@Value("classpath:rss/engineering_blogs.opml") resourceOpml: Resource): Feeds = OpmlFeeds(resourceOpml)

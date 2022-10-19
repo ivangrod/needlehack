@@ -1,0 +1,7 @@
+spring:
+  data:
+    mongodb:
+      database: needlehack
+      authentication-database: admin
+      username: ivangrod
+      password: s3cr3t
