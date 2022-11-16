@@ -30,7 +30,6 @@ public class LoadAllFeedCommand {
         log.info(
                 "Start collecting all pills at {}",
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))
-
         );
 
         List<CompletableFuture<Void>> collectProcess = feeds.all().stream()
