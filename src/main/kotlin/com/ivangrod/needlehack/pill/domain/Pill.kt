@@ -1,9 +1,9 @@
 package com.ivangrod.needlehack.pill.domain
 
 data class Pill(
-    val id: PillId,
-    val title: Title,
     val uri: Uri,
+    val id: PillId = PillId.fromUri(uri),
+    val title: Title,
     val author: Author,
     val origin: Feed,
     val content: Content,
@@ -22,6 +22,6 @@ data class Pill(
             content: Content,
             publishedAt: PublishingDate,
             topics: Set<Topic>
-        ): Pill = Pill(PillId.fromUri(uri), title, uri, author, origin, content, CollectingDate(), publishedAt, topics)
+        ): Pill = Pill(uri, PillId.fromUri(uri), title, author, origin, content, CollectingDate(), publishedAt, topics)
     }
 }
