@@ -15,14 +15,18 @@ services:
     image: postgres
     container_name: local_pgdb
     restart: always
-    ports:
-      - "5432:5432"
+    #ports:
+    #  - "5432:5432"
     environment:
       POSTGRES_USER: ivangrod
       POSTGRES_PASSWORD: s3cr3t
       POSTGRES_DB: needlehack
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_INITDB_ARGS: --auth-host=md5
     volumes:
       - local_pgdata:/var/lib/postgresql/data
+    command: postgres -c password_encryption=md5
+
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin4_container
@@ -41,10 +45,13 @@ services:
     environment:
       - DB_USER=ivangrod
       - DB_PASSWORD=s3cr3t
-      - DB_HOST=db
+      - DB_HOST=local_pgdb
       - DB_NAME=needlehack
+      - AUTH_TYPE=scram-sha-256
       - POOL_MODE=transaction
       - ADMIN_USERS=postgres,ivangrod
+    volumes:
+      - ./pgbouncer/userlist.txt:/etc/pgbouncer/userlist.txt
     ports:
       - "5432:5432"
     depends_on:
