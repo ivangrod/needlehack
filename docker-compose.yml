@@ -16,7 +16,7 @@ services:
     container_name: local_pgdb
     restart: always
     ports:
-      - "54320:5432"
+      - "5432:5432"
     environment:
       POSTGRES_USER: ivangrod
       POSTGRES_PASSWORD: s3cr3t
@@ -34,6 +34,21 @@ services:
       PGADMIN_DEFAULT_PASSWORD: admin
     volumes:
       - pgadmin-data:/var/lib/pgadmin
+
+  # Connection pooling
+  pgbouncer:
+    image: edoburu/pgbouncer
+    environment:
+      - DB_USER=ivangrod
+      - DB_PASSWORD=s3cr3t
+      - DB_HOST=db
+      - DB_NAME=needlehack
+      - POOL_MODE=transaction
+      - ADMIN_USERS=postgres,ivangrod
+    ports:
+      - "5432:5432"
+    depends_on:
+      - db
 
 volumes:
   local_pgdata:

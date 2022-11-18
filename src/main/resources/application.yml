@@ -10,7 +10,7 @@ spring:
         enabled: true
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:54320/needlehack
+    url: jdbc:postgresql://localhost:5432/needlehack
     username: ivangrod
     password: s3cr3t
   sql:
