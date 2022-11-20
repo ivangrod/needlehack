@@ -39,6 +39,7 @@ dependencies {
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:mongodb")
     testImplementation("org.testcontainers:rabbitmq")
+    testImplementation("org.testcontainers:postgresql")
 }
 
 dependencyManagement {
