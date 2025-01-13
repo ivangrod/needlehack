@@ -15,31 +15,28 @@ import java.util.concurrent.CompletableFuture;
 @ShellComponent
 public class LoadAllFeedCommand {
 
-    private final Logger log = LoggerFactory.getLogger(LoadAllFeedCommand.class);
+	private final Logger log = LoggerFactory.getLogger(LoadAllFeedCommand.class);
 
-    private Feeds feeds;
-    private CollectPill port;
+	private final Feeds feeds;
+	private final CollectPill port;
 
-    public LoadAllFeedCommand(Feeds feeds, CollectPill port) {
-        this.feeds = feeds;
-        this.port = port;
-    }
+	public LoadAllFeedCommand(Feeds feeds, CollectPill port) {
+		this.feeds = feeds;
+		this.port = port;
+	}
 
-    @ShellMethod(key = "load-pills", value = "Collect pills for all feeds")
-    public String loadPills() {
-        log.info(
-                "Start collecting all pills at {}",
-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))
-        );
+	@ShellMethod(key = "load-pills", value = "Collect pills for all feeds")
+	public String loadPills() {
+		this.log.info("Start collecting all pills at {}",
+				LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS")));
 
-        List<CompletableFuture<Void>> collectProcess = feeds.all().stream()
-                .map(feed -> CompletableFuture.runAsync(() -> port.collect(new CollectPill.CollectPillCommand(feed)))).toList();
-        CompletableFuture.allOf(collectProcess.toArray(CompletableFuture[]::new)).join();
+		final List<CompletableFuture<Void>> collectProcess = this.feeds.all().stream().map(
+				feed -> CompletableFuture.runAsync(() -> this.port.collect(new CollectPill.CollectPillCommand(feed))))
+				.toList();
+		CompletableFuture.allOf(collectProcess.toArray(CompletableFuture[]::new)).join();
 
-        log.info(
-                "End collecting all pills at {}",
-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))
-        );
-        return "All pills have been collected";
-    }
+		this.log.info("End collecting all pills at {}",
+				LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS")));
+		return "All pills have been collected";
+	}
 }

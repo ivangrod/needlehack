@@ -9,7 +9,7 @@ import javax.persistence.*
 @Table(name = "pill")
 class JpaPill(
 
-    @Column(nullable = true)
+    @Column(nullable = true, length = 510)
     val title: String? = null,
 
     @Column(nullable = true)
