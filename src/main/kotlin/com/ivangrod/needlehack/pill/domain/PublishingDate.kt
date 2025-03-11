@@ -11,6 +11,10 @@ data class PublishingDate(val value: LocalDateTime) {
         publicationAt.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
     )
 
+    fun publicationDateFormatted(): String {
+        return value.format(TIME_FORMATTER)
+    }
+
     companion object {
         private val TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
 

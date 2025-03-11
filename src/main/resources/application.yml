@@ -21,3 +21,8 @@ spring:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+elasticsearch:
+  host: 127.0.0.1
+  port: 9200
+  schema: http

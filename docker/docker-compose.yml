@@ -1,0 +1,90 @@
+services:
+  mongo:
+    image: mongo:6.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=needlehack
+      - MONGO_INITDB_ROOT_USERNAME=ivangrod
+      - MONGO_INITDB_ROOT_PASSWORD=s3cr3t
+  db:
+    image: postgres
+    container_name: local_pgdb
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ivangrod
+      POSTGRES_PASSWORD: s3cr3t
+      POSTGRES_DB: needlehack
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - local_pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+  #############
+  # ELK
+  #############
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-wolfi:8.17.3
+    container_name: elasticsearch
+    environment:
+      - node.name=needlehack-node
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./elk/elastic/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./elk/elastic/data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - elk
+    healthcheck:
+      test: ["CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.17.3
+    container_name: kibana
+    volumes:
+      - ./elk/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+    ports:
+      - "5601:5601"
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+    healthcheck:
+      test: curl -f -o /tmp/kibana.txt localhost:5601/app/kibana || exit 1
+      interval: 30s
+      timeout: 90s
+      retries: 3
+
+networks:
+  elk:
+    driver: bridge
+
+volumes:
+  local_pgdata:
+  pgadmin_data:
+  mongo_data:

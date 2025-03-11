@@ -29,6 +29,10 @@ dependencies {
     implementation("org.springframework.shell:spring-shell-starter")
 
     implementation("org.postgresql:postgresql")
+    implementation("co.elastic.clients:elasticsearch-java:8.1.3")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.12.3")
+    implementation("jakarta.json:jakarta.json-api:2.0.1")
+//    implementation("org.eclipse.parsson:parsson:1.1.4")
 
     implementation("com.rometools:rome-opml:1.18.0")
     implementation("org.jsoup:jsoup:1.15.3")

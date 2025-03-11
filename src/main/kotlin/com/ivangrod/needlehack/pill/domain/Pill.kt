@@ -1,5 +1,8 @@
 package com.ivangrod.needlehack.pill.domain
 
+import java.util.stream.Collectors
+
+
 data class Pill(
     val uri: Uri,
     val id: PillId = PillId.fromUri(uri),
@@ -11,6 +14,26 @@ data class Pill(
     val publishedAt: PublishingDate,
     val topics: Set<Topic>
 ) {
+
+    fun toPrimitives(): HashMap<String?, Any?> {
+        return object : HashMap<String?, Any?>() {
+
+            @java.io.Serial
+            private val serialVersionUID: Long = 0
+
+            init {
+                put("title", title.value)
+                put("uri", uri.value)
+                put("creator", author.value)
+                put("origin", origin.channel.value)
+                put("feedUri", origin.uri.value)
+                put("content", content.value)
+                put("publication_date", publishedAt.publicationDateFormatted())
+                put("topics", topics.stream().map(Topic::value).collect(Collectors.joining(","))
+                )
+            }
+        }
+    }
 
     companion object {
 

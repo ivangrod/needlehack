@@ -205,3 +205,5 @@ bin/
 !**/src/test/**/bin/
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,gradle,java,kotlin,spring
+
+/docker/elk/elastic/data/
