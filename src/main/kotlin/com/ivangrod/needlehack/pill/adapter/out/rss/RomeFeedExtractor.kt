@@ -13,7 +13,6 @@ import java.net.URL
 class RomeFeedExtractor(private val contentProcessor: ContentProcessor) : FeedExtractor {
 
     override fun extract(feed: Feed): List<Pill> {
-        log.info("Extracting RSS from feed $feed.channel")
         return try {
             SyndFeedInput()
                 .build(XmlReader(URL(feed.uri.value)))
@@ -31,10 +30,6 @@ class RomeFeedExtractor(private val contentProcessor: ContentProcessor) : FeedEx
                         )
                 }.toList()
         } catch (exception: Exception) {
-            log.error(
-                "An error has been produced when the feed from source [{}] was loaded",
-                feed.channel
-            )
             listOf()
         }
     }

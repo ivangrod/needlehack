@@ -11,6 +11,7 @@ import com.ivangrod.needlehack.pill.application.port.out.FeedExtractor
 import com.ivangrod.needlehack.pill.application.port.out.Feeds
 import com.ivangrod.needlehack.pill.application.port.out.Pills
 import com.ivangrod.needlehack.pill.application.service.CollectPillHandler
+import com.ivangrod.needlehack.pill.domain.event.DomainEventPublisher
 import org.apache.http.HttpHost
 import org.elasticsearch.client.RestClient
 import org.springframework.beans.factory.annotation.Qualifier
@@ -46,8 +47,8 @@ class PillInitializr {
     fun feeds(@Value("classpath:rss/engineering_blogs.opml") resourceOpml: Resource): Feeds = OpmlFeeds(resourceOpml)
 
     @Bean
-    fun collectPill(feedExtractor: FeedExtractor, @Qualifier("elasticPills") pills: Pills): CollectPillHandler =
-        CollectPillHandler(feedExtractor, pills)
+    fun collectPill(feedExtractor: FeedExtractor, @Qualifier("elasticPills") pills: Pills, publisher: DomainEventPublisher): CollectPillHandler =
+        CollectPillHandler(feedExtractor, pills, publisher)
 
     @Bean
     @Throws(IOException::class)
