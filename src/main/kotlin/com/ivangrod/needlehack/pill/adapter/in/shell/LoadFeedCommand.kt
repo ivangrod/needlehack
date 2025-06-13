@@ -1,6 +1,7 @@
 package com.ivangrod.needlehack.pill.adapter.`in`.shell
 
 import com.ivangrod.needlehack.pill.application.port.`in`.CollectPill
+import com.ivangrod.needlehack.pill.application.port.`in`.CollectPillCommand
 import com.ivangrod.needlehack.pill.application.port.out.Feeds
 import com.ivangrod.needlehack.pill.domain.ChannelName
 import org.slf4j.Logger
@@ -20,7 +21,7 @@ class LoadFeedCommand(val feeds: Feeds, val port: CollectPill) {
                     .format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))
             }"
         )
-        feeds.byChannelName(ChannelName(name))?.let { port.collect(CollectPill.CollectPillCommand(it)) }
+        feeds.byChannelName(ChannelName(name))?.let { port.collect(CollectPillCommand(it)) }
 
         log.info(
             "End collecting pills for [${name.uppercase()}] at ${
@@ -40,7 +41,7 @@ class LoadFeedCommand(val feeds: Feeds, val port: CollectPill) {
                     .format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))
             }"
         )
-        feeds.all().parallelStream().forEach { port.collect(CollectPill.CollectPillCommand(it)) }
+        feeds.all().parallelStream().forEach { port.collect(CollectPillCommand(it)) }
         log.info(
             "End collecting all pills at ${
                 LocalDateTime.now()

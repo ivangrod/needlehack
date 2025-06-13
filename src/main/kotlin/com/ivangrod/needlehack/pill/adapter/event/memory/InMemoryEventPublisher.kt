@@ -12,7 +12,7 @@ class InMemoryEventPublisher(private val delegatedPublisher: ApplicationEventPub
 
     override fun publish(event: DomainEvent) {
         delegatedPublisher.publishEvent(event)
-            .also { log.info("Event published [{}]", event) }
+            .also { log.debug("Event published [{}]", event::class.simpleName) }
     }
 
     companion object {

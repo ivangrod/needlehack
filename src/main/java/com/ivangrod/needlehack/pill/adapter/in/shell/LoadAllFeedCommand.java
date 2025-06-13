@@ -2,6 +2,7 @@ package com.ivangrod.needlehack.pill.adapter.in.shell;
 
 import com.ivangrod.needlehack.pill.adapter.service.FeedErrorsViewer;
 import com.ivangrod.needlehack.pill.application.port.in.CollectPill;
+import com.ivangrod.needlehack.pill.application.port.in.CollectPillCommand;
 import com.ivangrod.needlehack.pill.application.port.out.Feeds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,8 +32,8 @@ public class LoadAllFeedCommand {
 		this.log.info("Start collecting all pills at {}",
 				LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS")));
 
-		final List<CompletableFuture<Void>> collectProcess = this.feeds.all().stream().map(
-				feed -> CompletableFuture.runAsync(() -> this.port.collect(new CollectPill.CollectPillCommand(feed))))
+		final List<CompletableFuture<Void>> collectProcess = this.feeds.all().stream()
+				.map(feed -> CompletableFuture.runAsync(() -> this.port.collect(new CollectPillCommand(feed))))
 				.toList();
 		CompletableFuture.allOf(collectProcess.toArray(CompletableFuture[]::new)).join();
 
