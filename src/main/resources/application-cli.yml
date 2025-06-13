@@ -1,0 +1,26 @@
+spring:
+  main:
+    web-application-type: none
+  shell:
+    interactive:
+      enabled: true
+  data:
+    jpa:
+      repositories:
+        enabled: true
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/needlehack
+    username: ivangrod
+    password: s3cr3t
+  sql:
+    init:
+      mode: always
+      continue-on-error: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect

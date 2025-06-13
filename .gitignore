@@ -204,6 +204,8 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 
-# End of https://www.toptal.com/developers/gitignore/api/intellij,gradle,java,kotlin,spring
-
+### Docker ###
 /docker/elk/elastic/data/
+/docker/ia/ollama-models/
+
+# End of https://www.toptal.com/developers/gitignore/api/intellij,gradle,java,kotlin,spring
