@@ -12,7 +12,8 @@ data class Pill(
     val content: Content,
     val collectedAt: CollectingDate,
     val publishedAt: PublishingDate,
-    val topics: Set<Topic>
+    val topics: Set<Topic>,
+    val embedding: Embedding?
 ) {
 
     fun toPrimitives(): HashMap<String?, Any?> {
@@ -29,8 +30,8 @@ data class Pill(
                 put("feedUri", origin.uri.value)
                 put("content", content.value)
                 put("publication_date", publishedAt.publicationDateFormatted())
-                put("topics", topics.stream().map(Topic::value).collect(Collectors.joining(","))
-                )
+                put("topics", topics.stream().map(Topic::value).collect(Collectors.joining(",")))
+                put("embedding", embedding?.value)
             }
         }
     }
@@ -44,7 +45,7 @@ data class Pill(
             origin: Feed,
             content: Content,
             publishedAt: PublishingDate,
-            topics: Set<Topic>
-        ): Pill = Pill(uri, PillId.fromUri(uri), title, author, origin, content, CollectingDate(), publishedAt, topics)
+            topics: Set<Topic>,
+        ): Pill = Pill(uri, PillId.fromUri(uri), title, author, origin, content, CollectingDate(), publishedAt, topics, embedding = null)
     }
 }

@@ -1,64 +1,73 @@
 package com.ivangrod.needlehack.pill
 
-import co.elastic.clients.elasticsearch.ElasticsearchClient
-import co.elastic.clients.json.jackson.JacksonJsonpMapper
-import co.elastic.clients.transport.rest_client.RestClientTransport
+import com.ivangrod.needlehack.pill.adapter.out.http.NomicEmbeddingClient
 import com.ivangrod.needlehack.pill.adapter.out.persistence.*
 import com.ivangrod.needlehack.pill.adapter.out.resources.OpmlFeeds
 import com.ivangrod.needlehack.pill.adapter.out.rss.RomeFeedExtractor
 import com.ivangrod.needlehack.pill.adapter.out.text.JsoupProcessor
+import com.ivangrod.needlehack.pill.adapter.service.PillEmbeddingFromAIModel
+import com.ivangrod.needlehack.pill.adapter.service.QueryEmbeddingFromAIModel
 import com.ivangrod.needlehack.pill.application.port.out.FeedExtractor
 import com.ivangrod.needlehack.pill.application.port.out.Feeds
 import com.ivangrod.needlehack.pill.application.port.out.Pills
+import com.ivangrod.needlehack.pill.application.port.out.Recommendations
 import com.ivangrod.needlehack.pill.application.service.CollectPillHandler
+import com.ivangrod.needlehack.pill.application.service.RecommendPillHandler
 import com.ivangrod.needlehack.pill.domain.event.DomainEventPublisher
-import org.apache.http.HttpHost
-import org.elasticsearch.client.RestClient
+import com.ivangrod.needlehack.pill.domain.service.PillEmbedding
+import com.ivangrod.needlehack.pill.domain.service.QueryEmbedding
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.io.Resource
-import java.io.IOException
+import org.springframework.web.client.RestTemplate
 
 
 @Configuration
 class PillInitializr {
 
-    @Value("\${elasticsearch.host}")
-    private lateinit var host: String
-
-    @Value("\${elasticsearch.port}")
-    private lateinit var port: String
-
-    @Value("\${elasticsearch.schema}")
-    private lateinit var schema: String
+    @Configuration
+    class RestTemplateConfig {
+        @Bean
+        fun restTemplate(): RestTemplate = RestTemplate()
+    }
 
     @Bean
     fun feedExtractor(): FeedExtractor = RomeFeedExtractor(JsoupProcessor())
 
-    @Bean("mongoPills")
-    fun pills(repository: MongoDBPillRepository): Pills = MongoDBPills(repository)
-
     @Bean("jpaPills")
     fun pills(repository: JpaPillRepository): Pills = JpaPills(repository)
+
+    @Bean("jpaRecommendations")
+    fun recommendations(repository: JpaRecommendationRepository): Recommendations = JpaRecommendations(repository)
 
     @Bean
     fun feeds(@Value("classpath:rss/engineering_blogs.opml") resourceOpml: Resource): Feeds = OpmlFeeds(resourceOpml)
 
     @Bean
-    fun collectPill(feedExtractor: FeedExtractor, @Qualifier("elasticPills") pills: Pills, publisher: DomainEventPublisher): CollectPillHandler =
-        CollectPillHandler(feedExtractor, pills, publisher)
+    fun embeddingClient(restTemplate: RestTemplate): NomicEmbeddingClient = NomicEmbeddingClient(restTemplate)
 
     @Bean
-    @Throws(IOException::class)
-    fun elasticsearchClient(): ElasticsearchClient {
-        val restClient: RestClient = RestClient.builder(HttpHost(host, port.toInt(), schema)).build()
-        val transport = RestClientTransport(restClient, JacksonJsonpMapper())
-        return ElasticsearchClient(transport)
-    }
+    fun pillEmbedding(embeddingClient: NomicEmbeddingClient): PillEmbedding = PillEmbeddingFromAIModel(embeddingClient)
 
-    @Bean("elasticPills")
-    fun pills(elasticsearchClient: ElasticsearchClient): ElasticSearchPills =
-        ElasticSearchPills(elasticsearchClient, "needlehack")
+    @Bean
+    fun queryEmbedding(embeddingClient: NomicEmbeddingClient): QueryEmbedding =
+        QueryEmbeddingFromAIModel(embeddingClient)
+
+    @Bean
+    fun collectPill(
+        feedExtractor: FeedExtractor,
+        pillEmbedding: PillEmbedding,
+        @Qualifier("jpaPills") pills: Pills,
+        publisher: DomainEventPublisher
+    ): CollectPillHandler =
+        CollectPillHandler(feedExtractor, pillEmbedding, pills, publisher)
+
+    @Bean
+    fun recommendPill(
+        queryEmbedding: QueryEmbedding,
+        @Qualifier("jpaRecommendations") recommendations: Recommendations,
+    ): RecommendPillHandler =
+        RecommendPillHandler(queryEmbedding, recommendations)
 }
