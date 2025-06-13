@@ -21,7 +21,7 @@ class RomeFeedExtractor(private val contentProcessor: ContentProcessor) : FeedEx
                     Pill
                         .collect(
                             Title(entry.title),
-                            Uri(entry.link),
+                            Uri.of(entry.link),
                             Author(entry.author),
                             feed,
                             extractContent(entry),

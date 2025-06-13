@@ -26,7 +26,7 @@ class OpmlFeeds(resourceOpml: Resource) : Feeds {
     init {
         this.feeds =
             (WireFeedInput().build(InputSource(resourceOpml.inputStream)) as Opml).outlines[0]?.children?.map {
-                Feed(Uri(it.xmlUrl), ChannelName(it.text))
+                Feed(Uri.of(it.xmlUrl), ChannelName(it.text))
             }?.toSet().orEmpty()
     }
 }
